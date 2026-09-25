@@ -11,14 +11,15 @@ public class ServicioEstudiantes {
 	private ArrayList<Estudiante> estudiantes = new ArrayList<>();
 
 //no permite duplicados
-	public void agregar(Estudiante estudiante) {
+	public Estudiante agregar(Estudiante estudiante) {
 		Estudiante existente = buscarPorCedula(estudiante.getCedula());
 		if(existente != null) {
 			System.out.println("El estudiante con cédula " + existente.getCedula() + " ya existe.");
-            return;
+            return null;
 		}else {
 			estudiantes.add(estudiante);
 			System.out.println("Estudiante registrado exitosamente.");
+			return estudiante;
 		}
 	}
 
@@ -31,20 +32,23 @@ public class ServicioEstudiantes {
 		return null;
 	}
 
-	public void eliminar(String cedula) {
+	public boolean eliminar(String cedula) {
 		Estudiante estudiante = buscarPorCedula(cedula);
 		if(estudiante != null) {
 			estudiantes.remove(estudiante);
-			System.out.println("Estudiante eliminado exitosamente.");
+			return true;
+		}else {
+			return false;
 		}
 	}
 
-	public void actualizar(String cedula, Estudiante nuevo) {
+	public Estudiante actualizar(String cedula, Estudiante nuevo) {
 		Estudiante estudiante = buscarPorCedula(cedula);
 		if(estudiante !=  null) {
 			estudiante.setNombre(nuevo.getNombre());
 			estudiante.setApellido(nuevo.getApellido());
 		}
+		return estudiante;
 	}
 
 	public ArrayList<Estudiante> listar() {
