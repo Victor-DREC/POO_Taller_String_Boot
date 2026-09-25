@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.krakedev.asistencias.entidades.Asistencia;
 import com.krakedev.asistencias.entidades.RegistroAsistencia;
 import com.krakedev.asistencias.services.ServicioAsistencia;
-import com.krakedev.asistencias.services.ServicioEstudiantes;
 
 @RestController
 @RequestMapping("/asistencias")
@@ -19,18 +18,17 @@ public class AsistenciaController {
 
 	private final ServicioAsistencia servicioAsistencia;
 
-	// Inyección de dependencias por constructor
-	public AsistenciaController(ServicioEstudiantes servicioEstudiantes) {
-		this.servicioAsistencia = new ServicioAsistencia(servicioEstudiantes);
-	}
+	public AsistenciaController(ServicioAsistencia servicioAsistencia) {
+        this.servicioAsistencia = servicioAsistencia;
+    }
 
-	@PostMapping("/{cedula}")
-	public RegistroAsistencia registrarAsistencia(@PathVariable String cedula) {
-		return servicioAsistencia.registrarAsistencia(cedula);
-	}
+    @PostMapping("/{cedula}")
+    public RegistroAsistencia registrarAsistencia(@PathVariable String cedula) {
+        return servicioAsistencia.registrarAsistencia(cedula);
+    }
 
-	@GetMapping("/{cedula}")
-	public List<Asistencia> consultarAsistencia(@PathVariable String cedula) {
-		return servicioAsistencia.consultarAsistencia(cedula);
-	}
+    @GetMapping("/{cedula}")
+    public List<Asistencia> consultarAsistencia(@PathVariable String cedula) {
+        return servicioAsistencia.consultarAsistencia(cedula);
+    }
 }

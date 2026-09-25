@@ -19,7 +19,11 @@ import com.krakedev.asistencias.services.ServicioEstudiantes;
 @RequestMapping("/estudiantes")
 public class EstudiantesController {
 
-	private final ServicioEstudiantes servicioEstudiantes = new ServicioEstudiantes();
+	private final ServicioEstudiantes servicioEstudiantes;
+	
+	public EstudiantesController(ServicioEstudiantes servicioEstudiantes) {
+	    this.servicioEstudiantes = servicioEstudiantes;
+	}
 	
 	@PostMapping
     public Estudiante agregar(@RequestBody Estudiante estudiante) {
